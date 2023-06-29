@@ -1,6 +1,13 @@
 package com.app.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,11 +44,12 @@ public class MyController {
 	}
 	
 	@GetMapping("/getCryptos")
-	private ResponseEntity<Crypto> getCryptoHandlertest(){
+	private Float getCryptoHandlertest(){
 		
 		String url = "http://localhost:8088/getCrypto";
 		ResponseEntity<Crypto> re = restTemplate.getForEntity(url, Crypto.class);
-		return re;
+		System.out.println(re.getBody().getBpi().getEUR().getRate_float());
+		return re.getBody().getBpi().getEUR().getRate_float();
 	}
 	
 }
