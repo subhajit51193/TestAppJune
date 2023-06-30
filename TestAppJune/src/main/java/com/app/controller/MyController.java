@@ -35,21 +35,70 @@ public class MyController {
 	}
 	
 	
-	@GetMapping("/getNews")
-	private ResponseEntity<Object> getNewsApiHandler(){
-		
-		String url = "https://newsapi.org/v2/top-headlines?country=in&apiKey=bcf0e8e59ceb4b92b1b40675b7463933";
-		ResponseEntity<Object> re = restTemplate.getForEntity(url, Object.class);
-		return re;
-	}
 	
 	@GetMapping("/getCryptos")
-	private Float getCryptoHandlertest(){
+	private String getCryptoHandlertest(){
 		
 		String url = "http://localhost:8088/getCrypto";
 		ResponseEntity<Crypto> re = restTemplate.getForEntity(url, Crypto.class);
 		System.out.println(re.getBody().getBpi().getEUR().getRate_float());
-		return re.getBody().getBpi().getEUR().getRate_float();
+		Crypto obj = re.getBody();
+		Float res = re.getBody().getBpi().getEUR().getRate_float();
+		int b = (int)(float)res;
+		String str = numberToWords(b);
+		return str;
+	}
+	
+	
+//	--------------------------------------------------------
+	
+	
+	
+//	converting method
+	
+	
+	public static String numberToWords(int number) {
+		
+//		variables
+		String words = "";
+		String[] singles = {	"zero","one","two","three","four","five","six", 
+                				"seven","eight","nine","ten","eleven","twelve",
+                				"thirteen","fourteen","fifteen","sixteen","seventeen", 
+                				"eighteen","nineteen" };
+		String[] doubles = {	"zero","ten","twenty","thirty","forty","fifty",
+                				"sixty","seventy","eighty","ninety" };
+		
+		if (number == 0) {
+			return "zero";
+		}
+		if ((number / 10000000) > 0) {
+		    words += numberToWords(number / 10000000) + " crore ";
+		    number %= 10000000;
+		}
+	    if ((number / 100000) > 0) {
+		    words += numberToWords(number / 100000) + " lakh ";
+		    number %= 100000;
+		}
+		if ((number / 1000) > 0) {
+		    words += numberToWords(number / 1000) + " thousand ";
+		    number %= 1000;
+		}
+		if ((number / 100) > 0) {
+		     words += numberToWords(number / 100) + " hundred ";
+		     number %= 100;
+		}
+		if (number > 0) {
+			if (number < 20) {
+				words += singles[number];
+			}
+			else {
+				 words += doubles[number / 10];
+				 if ((number % 10) > 0) {
+	            	 words += "-" + singles[number % 10];
+	             } 
+			}
+		}
+		return words;
 	}
 	
 }
