@@ -1,0 +1,15 @@
+2. Given a matrix of characters representing a place on Earth, where the value 'T' indicates the 
+presence of a Tree at that location and 'O' represents there is no tree at that point. An orchard is a 
+region with tress connected vertically, horizontally, or diagonally. The size of the orchard is the total 
+number of connected trees. Write a method to compute the sizes of all orchards in the matrix. 
+Example input: 
+[ 
+['O','T','O','O'], 
+['O','T','O','T'], 
+['T','T','O','T'], 
+['O','T','O','T'] 
+] 
+Note: Input can be in the code itself (it doesn't have to be supplied at runtime) 
+Output: 5, 3 
+If you are not able to get the exact output, still go ahead and upload the code. But ensure that your 
+code is commented well with the comments explaining the approach.
